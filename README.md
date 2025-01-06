@@ -1,4 +1,4 @@
-### Passo a passo e comandos para rodar a API
+# Passo a passo e comandos para rodar a API 
 ### OBS: É obrigatório que você tenha o docker instalado na sua máquina para realizar esse procedimento
 Clone Repositório
 ```sh
@@ -137,7 +137,7 @@ O desafio consiste em desenvolver uma API em laravel que simule uma TODO list (l
 
 ### Funcionalidades e Rotas da API
 
-#### Autenticação:
+## Autenticação:
 
 - **`POST /api/auth`** - Autentica o usuário.
 
@@ -156,9 +156,10 @@ O desafio consiste em desenvolver uma API em laravel que simule uma TODO list (l
 {
    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
+```
 
 
-#### Tarefas:
+## Tarefas:
 
 - **`GET /api/tasks`** - Lista todas as tarefas da base de dados
 
@@ -179,6 +180,10 @@ O desafio consiste em desenvolver uma API em laravel que simule uma TODO list (l
     }
 ]
 ```
+
+
+- **`GET /api/tasks?status=completed&date_start=2025-02-15&date_end=2025-02-20&order_by=title`** - Você pode ter o recurso de filtrar por alguns dados, tais como: status, data inicial, data final e pode solicitar uma ordenação por título ou data.
+
 
 - **`POST /api/tasks`** - Cadastra uma nova tarefa
 
@@ -207,7 +212,7 @@ O desafio consiste em desenvolver uma API em laravel que simule uma TODO list (l
 - **`DELETE /api/tasks/{id}`** - Deleta uma tarefa existente pelo seu ID.
 
 
-### Importante ressaltar que todas as solicitações o usuário precisa estar autenticado primeiro e é necessário passar o token em cada requisição. Acesse um postman ou insomnia para ter o sucesso das solicitações, procure pela aba Authorization, escolha a opção Authorization, em seguida opção Bearer Token e cole o seu token que foi retornado da requisição após a autenticação.
+### Importante ressaltar que todas as solicitações o usuário precisa estar autenticado. Logo após é necessário passar o token em cada requisição para ter o sucesso em cada recurso. Acesse um postman ou insomnia para ter fazer as solicitações. Escolha a opção Authorization, em seguida opção Bearer Token e cole o seu token que foi retornado da requisição após a autenticação.
 
 ```json
 {
