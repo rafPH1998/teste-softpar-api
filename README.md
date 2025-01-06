@@ -1,5 +1,5 @@
-### Passo a passo para rodar a API
-### OBS: É obrigatório que você tenha o docker instalado na sua máquina para fazer esse procedimento
+### Passo a passo e comandos para rodar a API
+### OBS: É obrigatório que você tenha o docker instalado na sua máquina para realizar esse procedimento
 Clone Repositório
 ```sh
 git clone https://github.com/rafPH1998/teste-softpar-api.git
@@ -81,7 +81,7 @@ php artisan key:generate
 
 
 ### Objetivo do Desafio
-O desafio consiste em desenvolver uma aplicação que simule uma TODO list (lista de tarefas) com funcionalidades básicas de: listar, adicionar uma nova tarefa, atualizar tarefa, atualizar status da tarefa e deletar tarefa.
+O desafio consiste em desenvolver uma API em laravel que simule uma TODO list (lista de tarefas) com funcionalidades básicas de: listar, adicionar uma nova tarefa, atualizar tarefa, atualizar status da tarefa e deletar tarefa.
 
 
 ### Estrutura do banco
@@ -151,10 +151,66 @@ O desafio consiste em desenvolver uma aplicação que simule uma TODO list (list
 }
 ```
 
+**Resposta**:
+```json
+{
+   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+
+
 #### Tarefas:
 
-- **GET /api/tasks** - Lista todas as tarefas da base de dados.
-- **POST /api/tasks** - Cadastra uma nova tarefa.
-- **PUT /api/tasks/{id}** - Atualiza as tarefas específico pelo seu ID.
-- **PUT /api/tasks/{id}** - Atualiza as tarefas específico pelo seu ID.
-- **DELETE /api/tasks/{id}** - Deleta uma tarefa existente pelo seu ID.
+- **`GET /api/tasks`** - Lista todas as tarefas da base de dados
+
+**Corpo**:
+
+```json
+[
+    {
+        "id": 1,
+        "title": "Comprar pão teste",
+        "description": "Ir ao mercado comprar pão",
+        "user_id": 1,
+        "status": "completed",
+        "created_at": "06/01/2025",
+        "updated_at": "06/01/2025",
+        "completed_at": "06/01/2025 21:02",
+        "completed": true
+    }
+]
+```
+
+- **`POST /api/tasks`** - Cadastra uma nova tarefa
+
+**Corpo**:
+
+```json
+{
+    "title": "Comprar abacate",
+    "description": "Ir ao mercado comprar abacate"
+}
+```
+
+- **`PUT /api/tasks/{id}`** - Atualiza dados da tarefa.
+
+**Corpo**:
+
+```json
+{
+    "title": "Comprar abacate atualizado",
+    "description": "Ir ao mercado comprar abacate atualizado"
+}
+```
+
+
+- **`PATCH /api/tasks/{taskId}`** - Atualiza o status da tarefa específico pelo seu ID.
+- **`DELETE /api/tasks/{id}`** - Deleta uma tarefa existente pelo seu ID.
+
+
+### Importante ressaltar que todas as solicitações o usuário precisa estar autenticado primeiro e é necessário passar o token em cada requisição. Acesse um postman ou insomnia para ter o sucesso das solicitações, procure pela aba Authorization, escolha a opção Authorization, em seguida opção Bearer Token e cole o seu token que foi retornado da requisição após a autenticação.
+
+```json
+{
+    "Authorization": "Bearer {seu-token-aqui}"
+}
+```
