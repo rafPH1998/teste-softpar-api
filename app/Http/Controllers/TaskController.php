@@ -21,7 +21,11 @@ class TaskController extends Controller
             $tasks->whereDate('created_at', $request->date);
         }
 
-        $tasks = $tasks->orderBy($request->get('sort_by', 'created_at'), $request->get('order', 'asc'))->get();
+        $tasks = $tasks->orderBy(
+            $request->get('sort_by', 'created_at'), 
+            $request->get('order', 'asc')
+        )->where('user_id', '=', auth()->user()->id)
+        ->get();
 
         return response()->json($tasks);
     }
