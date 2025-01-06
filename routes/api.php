@@ -13,7 +13,9 @@ Route::post('/auth', [AuthController::class, 'auth']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 
-Route::middleware('auth:sanctum')->group( function(){
+Route::middleware('auth:sanctum')->group(function () {
+    Route::patch('tasks/{taskId}/update-status', [TaskController::class, 'updateStatus']);
+
     Route::resources([
         'tasks' => TaskController::class,
     ]);

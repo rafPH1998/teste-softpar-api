@@ -49,7 +49,7 @@ class TaskController extends Controller
     {
         $validated = $request->validated();
 
-        if ($validated['status'] === 'completed' && !$task->completed_at) {
+        if ($request->status === 'completed' && !$task->completed_at) {
             $validated['completed_at'] = now();
         }
 
@@ -63,5 +63,21 @@ class TaskController extends Controller
         $task->delete();
 
         return response()->noContent();
+    }
+    
+    public function updateStatus(int $taskId)
+    {
+        $task = Task::query()->findOrFail($taskId);
+
+        $task->update([
+            'completed' => true,
+            'status' => 'completed',
+            'completed_at' => now(),
+        ]);
+
+        return response()->json([
+            'message' => 'Status atualizado com sucesso.',
+            'task' => $task,
+        ], 200);
     }
 }
