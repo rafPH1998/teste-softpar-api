@@ -64,6 +64,21 @@ senha: password
 Acesse o projeto
 [http://localhost:8085](http://localhost:8085)
 
+# Caso não possua o docker instalado
+
+- PHP versão 8+
+- Composer 2.7.4
+
+Instale as dependências do projeto
+```sh
+composer install
+```
+
+Gere a key do projeto Laravel
+```sh
+php artisan key:generate
+```
+
 
 ### Objetivo do Desafio
 O desafio consiste em desenvolver uma aplicação que simule uma TODO list (lista de tarefas) com funcionalidades básicas de: listar, adicionar uma nova tarefa, atualizar tarefa, atualizar status da tarefa e deletar tarefa.
@@ -119,3 +134,27 @@ O desafio consiste em desenvolver uma aplicação que simule uma TODO list (list
     <circle cx="250" cy="90" r="3" fill="#000" />
     <path d="M 350,190 L 350,200 L 340,195 Z" fill="#000" />
 </svg>
+
+### Funcionalidades e Rotas da API
+
+#### Autenticação:
+
+- **`POST /api/auth`** - Autentica o usuário.
+
+**Corpo**:
+
+```json
+{
+    "email": "test@example.com",
+    "password": "password",
+    "device_name": "teste"
+}
+```
+
+#### Tarefas:
+
+- **GET /api/tasks** - Lista todas as tarefas da base de dados.
+- **POST /api/tasks** - Cadastra uma nova tarefa.
+- **PUT /api/tasks/{id}** - Atualiza as tarefas específico pelo seu ID.
+- **PUT /api/tasks/{id}** - Atualiza as tarefas específico pelo seu ID.
+- **DELETE /api/tasks/{id}** - Deleta uma tarefa existente pelo seu ID.
