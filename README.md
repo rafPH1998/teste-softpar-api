@@ -50,7 +50,7 @@ Rodar as migrations
 php artisan migrate
 ```
 
-Rodar o comando abaixo para gerar um usuário e você se autenticar
+Rodar o comando abaixo para gerar tarefas automaticas e gerar um usuário para você se autenticar
 ```sh
 php artisan db:seed
 ```
@@ -67,6 +67,8 @@ Acesse o projeto
 # Caso não possua o docker instalado
 
 - PHP versão 8+
+- Mysql
+- Servidor Apache ou nginx
 - Composer 2.7.4
 
 Instale as dependências do projeto
@@ -81,7 +83,13 @@ php artisan key:generate
 
 
 ### Objetivo do Desafio
-O desafio consiste em desenvolver uma API em laravel que simule uma TODO list (lista de tarefas) com funcionalidades básicas de: listar, adicionar uma nova tarefa, atualizar tarefa, atualizar status da tarefa e deletar tarefa.
+O desafio consiste em desenvolver uma API que simule uma TODO list (lista de tarefas) com funcionalidades básicas de: listar, adicionar uma nova tarefa, atualizar tarefa, atualizar status da tarefa e deletar tarefa.
+
+### Tecnologias utilizadas
+- **`PHP`** 
+- **`Laravel 11`** 
+- **`Mysql`** 
+- **`Docker`** 
 
 
 ### Estrutura do banco

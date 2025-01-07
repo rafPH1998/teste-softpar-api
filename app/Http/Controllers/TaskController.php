@@ -9,23 +9,19 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    public function __construct(protected Task $taskModel)
+    { }
+
     public function index(Request $request)
     {
-        $tasks = Task::query();
-
-        if ($request->filled('status')) {
-            $tasks->where('status', $request->status);
-        }
-
-        if ($request->filled('date')) {
-            $tasks->whereDate('created_at', $request->date);
-        }
-
-        $tasks = $tasks->orderBy(
-            $request->get('sort_by', 'created_at'), 
-            $request->get('order', 'asc')
-        )->where('user_id', '=', auth()->user()->id)
-        ->get();
+        $filters = $request->only([
+            'status', 
+            'date_start', 
+            'date_end', 
+            'order_by'
+        ]);
+        
+        $tasks = $this->taskModel->getTasks($filters);
 
         return response()->json($tasks);
     }
