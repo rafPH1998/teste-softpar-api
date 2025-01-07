@@ -6,6 +6,7 @@ use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
@@ -20,10 +21,14 @@ class TaskController extends Controller
             'date_end', 
             'order_by'
         ]);
-        
-        $tasks = $this->taskModel->getTasks($filters);
 
-        return response()->json($tasks);
+        $tasks = $this->taskModel->getTasks($filters);
+        $totalsByStatus = $this->taskModel->countByStatus($filters);
+        
+        return response()->json([
+            'tasks' => $tasks,
+            'totals_by_status' => $totalsByStatus,
+        ]);
     }
 
     public function store(StoreTaskRequest $request)

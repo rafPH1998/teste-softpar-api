@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\DB;
 
 class Task extends Model
 {
@@ -29,6 +30,19 @@ class Task extends Model
         return $this->belongsTo(User::class)->select('id', 'name', 'email');
     }
 
+    public function countByStatus(array $filters = [])
+    {
+        return $this->select('status', DB::raw('count(*) as total'))
+            ->when(isset($filters['date_start']), function ($query) use ($filters) {
+                $query->whereDate('created_at', '>=', $filters['date_start']);
+            })
+            ->when(isset($filters['date_end']), function ($query) use ($filters) {
+                $query->whereDate('created_at', '<=', $filters['date_end']);
+            })
+            ->groupBy('status')
+            ->get();
+    }
+
     public function getTasks(array $filters = [])
     {
         $tasks = Task::with('user');
@@ -36,7 +50,7 @@ class Task extends Model
         $tasks->when(isset($filters['status']), function ($query) use ($filters) {
             $query->where('status', $filters['status']);
         });
-        
+
         $tasks->when(isset($filters['date_start']), function ($query) use ($filters) {
             $query->whereDate('created_at', '>=', $filters['date_start']);
         });
