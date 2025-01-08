@@ -91,6 +91,7 @@ O desafio consiste em desenvolver uma API que simule uma TODO list (lista de tar
 
 
 ## Tabela de tasks
+Essa tabela tem como finalidade para o sistema armazenar as informações atreladas as tarefas do usuário. De forma bem básica e funcional
 
 <table>
   <thead>
