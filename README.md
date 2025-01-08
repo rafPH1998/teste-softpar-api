@@ -142,14 +142,24 @@ Essa tabela tem como finalidade para o sistema armazenar as informações atrela
 
 - **`GET /api/tasks`** - Lista todas as tarefas da base de dados
 
-**Corpo**:
+**Resposta da API**:
 
 ```json
 [
     {
-        "id": 1,
-        "title": "Comprar pão teste",
-        "description": "Ir ao mercado comprar pão",
+        "id": 10,
+        "title": "Comprar novos livros para livraria",
+        "description": "Atualmente a livraria está acabando os livros",
+        "status": "completed",
+        "created_at": "06/01/2025",
+        "updated_at": "06/01/2025",
+        "completed_at": "06/01/2025 21:02",
+        "completed": true
+    },
+    {
+        "id": 11,
+        "title": "Estudar",
+        "description": "Estudar para o vestibular",
         "status": "completed",
         "created_at": "06/01/2025",
         "updated_at": "06/01/2025",
@@ -159,6 +169,22 @@ Essa tabela tem como finalidade para o sistema armazenar as informações atrela
 ]
 ```
 
+- **`GET /api/tasks/2`** - Lista uma tarefa específica pelo seu ID
+
+**Resposta da API**:
+
+```json
+{
+    "id": 12,
+    "title": "Comprar pão",
+    "description": "Ir ao mercado comprar pão pela manhã",
+    "status": "completed",
+    "created_at": "06/01/2025",
+    "updated_at": "06/01/2025",
+    "completed_at": "06/01/2025 21:02",
+    "completed": true
+}
+```
 
 - **`GET /api/tasks?status=completed&date_start=2025-02-15&date_end=2025-02-20&order_by=title`** - Você pode ter o recurso de filtrar por alguns dados, tais como: status, data inicial, data final e pode solicitar uma ordenação por título ou data.
 
