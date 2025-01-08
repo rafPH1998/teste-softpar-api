@@ -20,10 +20,8 @@ class TaskFactory extends Factory
         return [
             'title' => fake()->sentence(4), 
             'description' => fake()->sentence(50), 
-            'user_id' => User::factory(), 
-            'status' => fake()->randomElement(['pending', 'in_progress', 'completed']), 
-            'completed_at' => fake()->optional()->dateTime(), 
-            'completed' => fake()->boolean(50), 
+            'status' => 'pending', 
+            'completed' => 0, 
         ];
     }
 }

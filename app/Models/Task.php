@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\DB;
 
 class Task extends Model
@@ -25,27 +24,17 @@ class Task extends Model
         ]; 
     }
 
-    public function user(): BelongsTo
-    { 
-        return $this->belongsTo(User::class)->select('id', 'name', 'email');
-    }
-
-    public function countByStatus(array $filters = [])
-    {
-        return $this->select('status', DB::raw('count(*) as total'))
-            ->when(isset($filters['date_start']), function ($query) use ($filters) {
-                $query->whereDate('created_at', '>=', $filters['date_start']);
-            })
-            ->when(isset($filters['date_end']), function ($query) use ($filters) {
-                $query->whereDate('created_at', '<=', $filters['date_end']);
-            })
-            ->groupBy('status')
-            ->get();
-    }
-
     public function getTasks(array $filters = [])
     {
-        $tasks = Task::with('user');
+        $tasks = Task::query();
+
+        $tasks->when(isset($filters['status']), function ($query) use ($filters) {
+            if ($filters['status'] === 'pending') {
+                $query->where('completed', 0);
+            } elseif ($filters['status'] === 'completed') {
+                $query->where('completed', 1);
+            }
+        });
 
         $tasks->when(isset($filters['status']), function ($query) use ($filters) {
             $query->where('status', $filters['status']);

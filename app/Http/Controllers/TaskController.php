@@ -23,18 +23,13 @@ class TaskController extends Controller
         ]);
 
         $tasks = $this->taskModel->getTasks($filters);
-        $totalsByStatus = $this->taskModel->countByStatus($filters);
         
-        return response()->json([
-            'tasks' => $tasks,
-            'totals_by_status' => $totalsByStatus,
-        ]);
+        return response()->json(['tasks' => $tasks]);
     }
 
     public function store(StoreTaskRequest $request)
     {
         $validated = $request->validated();
-        $validated['user_id'] = auth()->user()->id;
 
         $task = Task::query()->create($validated);
 
@@ -68,17 +63,24 @@ class TaskController extends Controller
     
     public function updateStatus(int $taskId)
     {
-        $task = Task::query()->findOrFail($taskId);
+        try {
+            $task = Task::findOrFail($taskId);
 
-        $task->update([
-            'completed' => true,
-            'status' => 'completed',
-            'completed_at' => now(),
-        ]);
-
-        return response()->json([
-            'message' => 'Status atualizado com sucesso.',
-            'task' => $task,
-        ], 200);
+            $task->update([
+              'completed' => !$task->completed, 
+              'status' => $task->completed ? 'pending' : 'completed',
+              'completed_at' => !$task->completed ? now() : null,
+            ]);
+    
+            return response()->json([
+                'message' => 'Status atualizado com sucesso.',
+                'task' => $task,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao atualizar o status da tarefa.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 }
