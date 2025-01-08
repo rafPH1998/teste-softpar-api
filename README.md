@@ -97,32 +97,39 @@ O desafio consiste em desenvolver uma API que simule uma TODO list (lista de tar
     <tr>
       <th>Colunas</th>
       <th>Tipo</th>
+      <th>Finalidade</th>
     </tr>
   </thead>
  <tbody>
     <tr>
       <td>id</td>
       <td>primary_key</td>
+      <td>incrementar automaticamente o id de um novo registro</td>
     </tr>
     <tr>
       <td>title</td>
       <td>string</td>
+      <td>Armazenar o título escrita pelo usuário</td>
     </tr>
     <tr>
       <td>description</td>
       <td>string</td>
+      <td>Armazenar a descrição escrita pelo usuário</td>
     </tr>
      <tr>
       <td>status</td>
       <td>text</td>
+      <td>Armazenar o status para um melhor controle</td>
     </tr>
     <tr>
       <td>completed_at</td>
       <td>timestamp</td>
+      <td>Armazenar a data que aquela tarefa foi concluída</td>
     </tr>
     <tr>
       <td>completed</td>
       <td>boolean</td>
+      <td>Armazenar para ter um melhor controle na tela</td>
     </tr>
   </tbody>
 </table>
