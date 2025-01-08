@@ -62,7 +62,7 @@ Acesse o projeto
 # Caso não possua o docker instalado
 
 - PHP versão 8+
-- Mysql
+- Mysql versão 5+
 - Servidor Apache ou nginx
 - Composer 2.7.4
 
@@ -90,7 +90,7 @@ O desafio consiste em desenvolver uma API que simule uma TODO list (lista de tar
 ### Estrutura do banco
 
 
-## Tebela de tasks
+## Tabela de tasks
 
 <table>
   <thead>
@@ -178,6 +178,6 @@ O desafio consiste em desenvolver uma API que simule uma TODO list (lista de tar
 ```
 
 
-- **`PATCH /api/tasks/{taskId}`** - Atualiza o status da tarefa específico pelo seu ID.
+- **`PATCH /api/tasks/{taskId}/update-status`** - Atualiza o status da tarefa específico pelo seu ID.
 - **`DELETE /api/tasks/{id}`** - Deleta uma tarefa existente pelo seu ID.
 
